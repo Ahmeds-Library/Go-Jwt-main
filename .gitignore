@@ -1,0 +1,5 @@
+.env
+*.txt
+*.exe
+cmd/docs/*
+cmd/uploads/*

@@ -1,0 +1,40 @@
+version: '3.8'
+
+services:
+  db:
+    image: postgres:13
+    container_name: jwt-postgres
+    environment:    
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 03088808
+      POSTGRES_DB: postgres
+    ports:
+      - "5433:5432"
+    volumes:  
+      - postgres_data:/var/lib/postgresql/data  
+    networks:
+      - jwt-network
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go-jwt-app
+    ports:
+      - "8002:8002"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5433
+      USER: postgres
+      DB_PASSWORD: 03088808
+      DB_NAME: postgres
+    networks:
+      - jwt-network
+
+volumes:
+  postgres_data:
+
+networks:
+  jwt-network:
