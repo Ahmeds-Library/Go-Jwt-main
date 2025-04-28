@@ -34,7 +34,7 @@ func main() {
 
 	routes.RoutesHandler(r)
 
-	r.Run(":8000")
+	r.Run(":8001")
 }
 func LoadEnvVariables() {
 	err := godotenv.Load(".env")

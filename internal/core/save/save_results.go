@@ -5,14 +5,13 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/Ahmeds-Library/Go-Jwt/internal/database"
 	"github.com/Ahmeds-Library/Go-Jwt/internal/models"
 )
 
 func SaveResult(db *sql.DB, result models.Results, userID string, username string) error {
-	query := `
-			INSERT INTO Results 
-			(words, digits, special_char, lines, spaces, sentences, punctuation, consonants, vowels, user_id, username)
-			VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)`
+
+	query := database.SaveResultQuery
 
 	_, err := db.Exec(query,
 		result.Words,

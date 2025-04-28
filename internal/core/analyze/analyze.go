@@ -28,7 +28,6 @@ func Analyze(a string) models.Results {
 		}
 	}
 
-	// Adjust for the last line and paragraph
 	results.Lines++
 	results.Words++
 

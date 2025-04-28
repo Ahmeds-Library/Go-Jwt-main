@@ -1,7 +1,6 @@
 package handler
 
 import (
-	"fmt"
 	"net/http"
 
 	"github.com/Ahmeds-Library/Go-Jwt/internal/core/token"
@@ -29,12 +28,13 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	var dbPassword, dbID string
-
-	err := database.Db.QueryRow("SELECT password, id FROM users  WHERE username = $1", u.Username).Scan(&dbPassword, &dbID)
-	fmt.Println(err)
+	dbPassword, dbID, err := database.GetUserCredentials(u.Username)
 	if err != nil {
-		c.JSON(http.StatusUnauthorized, gin.H{"error": "User not found"})
+		if err.Error() == "user not found" {
+			c.JSON(http.StatusUnauthorized, gin.H{"error": "User not found"})
+		} else {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": "Database error"})
+		}
 		return
 	}
 
