@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/Ahmeds-Library/Go-Jwt/internal/api/middleware"
+	"github.com/Ahmeds-Library/Go-Jwt/internal/services"
 	"github.com/golang-jwt/jwt/v5"
 )
 
@@ -16,7 +16,7 @@ func CreateToken(id, username string) (string, error) {
 			"exp":      time.Now().Add(time.Minute * 30).Unix(),
 		})
 
-	tokenString, err := token.SignedString(middleware.SecretKey)
+	tokenString, err := token.SignedString(services.SecretKey)
 	if err != nil {
 		return "", err
 	}
@@ -29,7 +29,7 @@ func DecodeToken(tokenString string) (jwt.MapClaims, error) {
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
 			return nil, errors.New("unexpected signing method")
 		}
-		return middleware.SecretKey, nil
+		return services.SecretKey, nil
 	})
 
 	if err != nil {

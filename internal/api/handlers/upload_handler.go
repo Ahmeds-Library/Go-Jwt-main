@@ -6,10 +6,9 @@ import (
 	"os"
 	"path/filepath"
 
-	"github.com/Ahmeds-Library/Go-Jwt/internal/core/analyze"
-	save_results "github.com/Ahmeds-Library/Go-Jwt/internal/core/save"
 	"github.com/Ahmeds-Library/Go-Jwt/internal/core/token"
 	"github.com/Ahmeds-Library/Go-Jwt/internal/database"
+	"github.com/Ahmeds-Library/Go-Jwt/internal/services"
 	"github.com/gin-gonic/gin"
 )
 
@@ -73,9 +72,9 @@ func Upload(c *gin.Context) {
 	}
 
 	data := string(content)
-	result := analyze.Analyze(data)
+	result := services.Analyze(data)
 
-	save_results.SaveResult(database.Db, result, UserID, Username)
+	database.SaveResult(database.Db, result, UserID, Username)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status":   http.StatusOK,

@@ -5,7 +5,7 @@ import (
 
 	"github.com/Ahmeds-Library/Go-Jwt/internal/core/token"
 	"github.com/Ahmeds-Library/Go-Jwt/internal/database"
-	"github.com/Ahmeds-Library/Go-Jwt/internal/utils"
+	"github.com/Ahmeds-Library/Go-Jwt/internal/services"
 	"github.com/gin-gonic/gin"
 )
 
@@ -45,7 +45,7 @@ func GetResults(c *gin.Context) {
 		return
 	}
 
-	offset, limit, page := utils.PaginationHandler(c)
+	offset, limit, page := services.PaginationHandler(c)
 
 	results, err := database.FetchResults(username, userID, limit, offset)
 	if err != nil {

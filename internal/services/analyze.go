@@ -1,4 +1,4 @@
-package analyze
+package services
 
 import "github.com/Ahmeds-Library/Go-Jwt/internal/models"
 

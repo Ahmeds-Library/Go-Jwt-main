@@ -1,4 +1,4 @@
-package middleware
+package services
 
 import (
 	"fmt"
@@ -7,6 +7,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v5"
 )
+
 var SecretKey = []byte("secret-key")
 
 func VerifyToken(tokenString string) error {
@@ -19,7 +20,7 @@ func VerifyToken(tokenString string) error {
 	}
 
 	if !token.Valid {
-		return fmt.Errorf("Invalid token")
+		return fmt.Errorf("invalid token")
 	}
 
 	return nil

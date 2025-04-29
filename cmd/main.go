@@ -1,13 +1,9 @@
 package main
 
 import (
-	"log"
-	"os"
-
 	"github.com/Ahmeds-Library/Go-Jwt/internal/api/routes"
 	"github.com/Ahmeds-Library/Go-Jwt/internal/database"
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
 )
 
 // @title User Auth Application APIs
@@ -35,14 +31,4 @@ func main() {
 	routes.RoutesHandler(r)
 
 	r.Run(":8001")
-}
-func LoadEnvVariables() {
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Fatalf("Error loading .env file: %v", err)
-	}
-}
-
-func GetEnvVariable(key string) string {
-	return os.Getenv(key)
 }
